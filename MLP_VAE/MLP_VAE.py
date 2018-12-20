@@ -12,7 +12,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import scipy
 
-
 def build_dense(input_vector,unit_no,activation):    
     return tf.layers.dense(input_vector,unit_no,activation=activation,
             kernel_initializer=tf.contrib.layers.xavier_initializer(),
@@ -37,10 +36,10 @@ class MLP_VAE:
         
         self.keep_prob = 0.9
         self.learn_rate = 0.00001
-        self.batch_size = 4 
+        self.batch_size = 256 
         # batch_size should be smaller than normal setting for getting
         # a relatively lower anomaly-score-threshold
-        self.train_iter = 160000         
+        self.train_iter = 1600        
         self.hidden_units = 128
         
         self._build_VAE()
@@ -65,9 +64,11 @@ class MLP_VAE:
             l1 = build_dense(z,self.hidden_units,tf.nn.elu)
             l1 = tf.nn.dropout(l1,keep_prob=self.keep_prob)            
             l2 = build_dense(l1,self.hidden_units,tf.nn.elu)
-            l2= tf.nn.dropout(l2,keep_prob=self.keep_prob)                      
-            y = tf.layers.dense(l2,self.input_dim)
-        return y
+            l2 = tf.nn.dropout(l2,keep_prob=self.keep_prob)                      
+            reconx_x_mu = tf.layers.dense(l2,self.input_dim)
+            reconx_x_sigma = tf.layers.dense(l2,self.input_dim,activation=tf.nn.softplus)
+            recons_X = reconx_x_mu + reconx_x_sigma * tf.random_normal(tf.shape(reconx_x_mu),0,1,dtype=tf.float32)            
+        return recons_X
 
 
     def _build_VAE(self):
@@ -124,10 +125,10 @@ class MLP_VAE:
                 self.input_X: train_X                
                 })
         self.error_gaussion = scipy.stats.norm(loc=train_error_mean,scale=train_error_std)
-        log_prob_array = np.log(self.error_gaussion.pdf(all_errors) + self.epsilon )
-        log_prob_mean = np.mean(log_prob_array,axis=1)        
+        prob_prod = np.prod(self.error_gaussion.pdf(all_errors) + self.epsilon, axis=1)
+        log_prob_mean = np.log(prob_prod)        
         kl_divergence = np.mean(kl_divergence,axis=1)
-        anomaly_scores = self.input_dim * kl_divergence.ravel() - log_prob_mean.ravel()
+        anomaly_scores = kl_divergence.ravel() - log_prob_mean.ravel()
         self.judge_score = np.percentile(anomaly_scores,(1-self.outliers_fraction)*100)
     
     def judge(self,X):
@@ -136,13 +137,15 @@ class MLP_VAE:
                      self.recons_error],feed_dict={
                     self.input_X: X                    
                     })
-        self.this_log_prob_array = np.log(self.error_gaussion.pdf(self.this_error)+ self.epsilon)
-        self.this_score = self.input_dim * np.mean(self.this_kl_divergence) - np.mean(self.this_log_prob_array)
+        self.this_log_prob_array = np.prod(self.error_gaussion.pdf(self.this_error)+ self.epsilon)
         
-        if float(self.this_score) >  self.judge_score:
+        self.this_score = np.mean(self.this_kl_divergence) - np.log(self.this_log_prob_array)
+        
+        if self.this_score >  self.judge_score:
             return 2
         else:
             return 1
+
         
 def main():       
     train = np.load('data/train.npy')
