@@ -1,8 +1,8 @@
 
 MLP_VAE used for anomaly detection;
-reference [reference](https://pdfs.semanticscholar.org/0611/46b1d7938d7a8dae70e3531a00fceb3c78e8.pdf);
+[reference](https://pdfs.semanticscholar.org/0611/46b1d7938d7a8dae70e3531a00fceb3c78e8.pdf);
 
-The dataset used is the HTRU2 Data Set [HTRU2 Data Set](http://archive.ics.uci.edu/ml/datasets/HTRU2). This is an unbanlaced dataset, where samples with Class 1 is less than 10%, which is treated as anomaly class;
+The dataset used is the [HTRU2 Data Set](http://archive.ics.uci.edu/ml/datasets/HTRU2). This is an unbanlaced dataset, where samples with Class 1 is less than 10%, which is treated as anomaly class;
 
 All the dimensions are preprocessed by sklearn StandardScaler and MinMaxScaler to better fit for MLP_VAE;
 
