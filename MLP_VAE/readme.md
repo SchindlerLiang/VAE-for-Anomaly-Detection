@@ -7,8 +7,11 @@ The dataset used is the HTRU2 Data Set [HTRU2 Data Set](http://archive.ics.uci.e
 All the dimensions are preprocessed by sklearn StandardScaler and MinMaxScaler to better fit for MLP_VAE;
 
 The test results of MLP_VAE,IForest and LOF are presented as follows:
+
 ![Confusion_Matrix for MLP_VAE](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/MLP_VAE/img/MLP_VAE.png)
+
 ![Confusion_Matrix for Iforest](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/MLP_VAE/img/iforest.png)
+
 ![Confusion_Matrix for LOF](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/MLP_VAE/img/lof.png)
 
 The outliers_fraction for MLP_VAE are specially set to be different for better computing the anomaly score. It can be seen from above that MLP_VAE can obtain even results with IForest and LOF;
