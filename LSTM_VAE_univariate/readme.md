@@ -4,7 +4,7 @@ LSTM_VAE used for Univariate Time Series Anomaly Detection;
 [reference2](https://github.com/twairball/keras_lstm_vae);
 [reference3](https://arxiv.org/pdf/1711.00614.pdf);
 
-The dataset used is the [MTSAD](https://github.com/jsonbruce/MTSAnomalyDetection). We use StandardScaler and MinMaxScaler to preprocess the initial data. Then we re-set the dataset to be 3_dimensional with time_steps of 6. For each sample, if one column is labeled as abnormal, then the corresponding 3_dimensional sample is labeled as ABNORMAL;
+The dataset used is the [MTSAD](https://github.com/jsonbruce/MTSAnomalyDetection). We use StandardScaler and MinMaxScaler to preprocess the initial data. Then we re-set the dataset to be 3_dimensional with time_steps of 6. For each sample, if one in the 6_timesteps is labeled as abnormal, then the corresponding 3_dimensional sample is labeled as ABNORMAL;
 
 In total, there are 1326 abnormal samples and 7419 normal samples. We randomly select 6000 normal samples as train dataset, 1419 normal samples and 1326 abnormal samples as test dataset. As a result, the abnormal samples constitute 48.3% of the test dataset.
 
