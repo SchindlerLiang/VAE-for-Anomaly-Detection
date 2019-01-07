@@ -1,5 +1,5 @@
 ## Reference
-LSTM_VAE used for Univariate Time Series Anomaly Detection;
+LSTM_VAE used for Multi_Variational Time Series Anomaly Detection;
 [reference1](https://www.researchgate.net/publication/304758073_LSTM-based_Encoder-Decoder_for_Multi-sensor_Anomaly_Detection);
 [reference2](https://github.com/twairball/keras_lstm_vae);
 [reference3](https://arxiv.org/pdf/1711.00614.pdf);
