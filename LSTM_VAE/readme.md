@@ -13,7 +13,7 @@ LSTM_VAE used for Multivariate Time Series Anomaly Detection;
 * Matplotlib 3.0.2
 
 ## Dataset and Preprocessing
-The dataset used is the [MTSAD](https://github.com/jsonbruce/MTSAnomalyDetection). This dataset has 2 dimensions.
+The dataset used is the [MTSAD](https://github.com/jsonbruce/MTSAnomalyDetection), which has 2 dimensions.
 We use StandardScaler and MinMaxScaler to preprocess the initial data. Then we re-set the dataset to be 3_dimensional with time_steps of 10. 
 For each sample, if one in the 10_timesteps is labeled as abnormal, then the corresponding 3_dimensional sample is labeled as ABNORMAL;
 
