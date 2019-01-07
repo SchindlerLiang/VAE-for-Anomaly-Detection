@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-One simple Implementation of LSTM_VAE based algorithm for Anomaly Detection in for Time Series;
+One simple Implementation of LSTM_VAE based algorithm for Anomaly Detection  for Multivariate Time Series;
 
 Author: Schindler Liang
 
