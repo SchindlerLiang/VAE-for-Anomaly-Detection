@@ -19,6 +19,8 @@ For each sample, if ANY ONE in the 10_timesteps is labeled as abnormal, then the
 
 In total, there are 55 abnormal samples and 8661 normal samples. We randomly select 8000 normal samples as train dataset, 661 normal samples and 55 abnormal samples as test dataset. As a result, the abnormal samples constitute only 7.7% of the test dataset.
 
+`LSTM_VAE should be trained on NORMAL Dataset. However, dataset with only a few ABNORMAL samples is also acceptable, since we can adjust the hyper_parameter outliers_fraction, which may slightly influnce the detection score.`
+
 ## Result
 The confusion_matrix of the test dataset are presented as:
 
