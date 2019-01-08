@@ -33,8 +33,8 @@ class Data_Hanlder(object):
     def data_arrage(self):
 
         d_array = self.data[self.columns].values
-        self.all_data = np.array([[a,b,c,d,e,f,g,h,i,g] 
-                for a,b,c,d,e,f,g,h,i,g in 
+        self.all_data = np.array([[a,b,c,d,e,f,g,h,i,j] 
+                for a,b,c,d,e,f,g,h,i,j in 
                 zip(d_array[:-9],d_array[1:-8],d_array[2:-7],
                     d_array[3:-6],d_array[4:-5],d_array[5:-4],
                     d_array[6:-3],d_array[7:-2],d_array[8:-1],
