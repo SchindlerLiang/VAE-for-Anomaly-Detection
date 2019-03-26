@@ -1,8 +1,8 @@
 ## Reference
-LSTM_VAE used for Multivariate Time Series Anomaly Detection;
-[reference1](https://www.researchgate.net/publication/304758073_LSTM-based_Encoder-Decoder_for_Multi-sensor_Anomaly_Detection);
-[reference2](https://github.com/twairball/keras_lstm_vae);
-[reference3](https://arxiv.org/pdf/1711.00614.pdf);
+High-frequency Multivariate Time Series Anomaly Detection based on IndRNN with AutoEncoder(both AE and VAE);
+[reference1](https://github.com/twairball/keras_lstm_vae). The IndRNN implementation is from 
+[reference2](https://github.com/batzner/indrnn);
+
 
 ## Prerequisites
 * Python 3.3+
@@ -13,18 +13,16 @@ LSTM_VAE used for Multivariate Time Series Anomaly Detection;
 * Matplotlib 3.0.2
 
 ## Dataset and Preprocessing
-The dataset used is the [MTSAD](https://github.com/jsonbruce/MTSAnomalyDetection), which has 2 dimensions.
-We use StandardScaler and MinMaxScaler to preprocess the initial data. Then we re-set the dataset to be 3_dimensional with time_steps of 10. 
-For each sample, if ANY ONE in the 10_timesteps is labeled as abnormal, then the corresponding 3_dimensional sample is labeled as ABNORMAL;
+The dataset used is the [MTSAD](https://github.com/jsonbruce/MTSAnomalyDetection), which has 2 dimensions. 
+Then we re-set the dataset to be 3_dimensional with time_steps of 16. The detailed preprecessing process can be found at 
+the LSTM_VAE chapter[reference3](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/LSTM_VAE/utils.py).
 
-In total, there are 55 abnormal samples and 8661 normal samples. We randomly select 8000 normal samples as train dataset, 661 normal samples and 55 abnormal samples as test dataset. As a result, the abnormal samples constitute only 7.7% of the test dataset.
+IndRNN_(V)AE algorithm should be trained on the Normal samples. In this algorithm, we present two score-functions for accessing the test_data. judge_anomaly() for anomaly detection and judge_health() for healthy accessment, which may be of use in high-frequency industry sensors.
 
-`LSTM_VAE should be trained on NORMAL Dataset. However, dataset with only a few ABNORMAL samples is also acceptable, since we can adjust the hyper-parameter outliers_fraction, which may slightly influnce the detection score.`
 
-## Result
-The confusion_matrix of the test dataset are presented as:
+## Network Structure
+The Structure of the network presented here 
 
-![Confusion_Matrix for LSTM_VAE](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/LSTM_VAE/LSTM_VAE.png)
+![Network Structure for IndRNN_(V)AE](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/INDRNN_(V)AE/graph.png)
 
-It can be concluded from above that LSTM_VAE is capable of capturing most of the outliers (anomaly) in the test dataset.
-
+Note that we use both AE and VAE structure, with the thoughts of keeping time-dependent information by AE and maitaining variability by VAE. 
