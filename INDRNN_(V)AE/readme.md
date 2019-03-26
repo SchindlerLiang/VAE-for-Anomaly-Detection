@@ -23,7 +23,6 @@ IndRNN_(V)AE algorithm should be trained on the Normal samples. In this algorith
 ## Network Structure
 The Structure of the network presented here 
 
-![Confusion_Matrix for LSTM_VAE](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/LSTM_VAE/LSTM_VAE.png)
+![Network Structure for IndRNN_(V)AE](https://github.com/SchindlerLiang/VAE-for-Anomaly-Detection/blob/master/INDRNN_(V)AE/graph.png)
 
-It can be concluded from above that LSTM_VAE is capable of capturing most of the outliers (anomaly) in the test dataset.
-
+Note that we use both AE and VAE structure, with the thoughts of keeping time-dependent information by AE and maitaining variability by VAE. 
